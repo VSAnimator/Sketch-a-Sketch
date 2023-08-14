@@ -8,7 +8,7 @@ from PIL import Image
 
 negative_prompt = ""
 device = torch.device('cuda')
-controlnet = ControlNetModel.from_pretrained("vsanimator/guidelines", torch_dtype=torch.float16).to(device)
+controlnet = ControlNetModel.from_pretrained("vsanimator/sketch-a-sketch", torch_dtype=torch.float16).to(device)
 pipe = StableDiffusionControlNetPipeline.from_pretrained(
     "runwayml/stable-diffusion-v1-5", 
     controlnet=controlnet, torch_dtype=torch.float16
