@@ -20,3 +20,9 @@ If the AI isn’t giving you the images you want, don’t worry. Just draw a few
 Even better, *Sketch-a-Sketch* will help you create "winning" sketches. As you sketch, the *Sketch-a-Sketch* system will show you suggested future lines that will be most helpful in helping the AI guess what final image you want.
 
 Check out our [blog](vsanimator.github.io/sketchasketch), try out our [demo](https://colab.research.google.com/drive/1Biw7s0BD_NtV3wC2lIjVaeg6qXj0KOTv?usp=sharing) to make your own sketches, or run the Gradio app locally by cloning this repo, installing requirements from requirements.txt, and running demo.py.
+
+## Gradio instructions
+
+In the interface, draw your sketch on the "Sketch" tab, and click "Render" to generate the corresponding images. After rendering, switch to the "Suggested Lines" tab to visualize the suggested next lines to draw. Un-check the "Generate suggested lines" checkbox if you would like to stop generating suggestions. Whenever you'd like to start a new drawing, just click "Reset". 
+
+**Note that there is a Gradio bug associated with clicking "Render" with a fully empty sketch**, so please draw at least one line before clicking "Render"
