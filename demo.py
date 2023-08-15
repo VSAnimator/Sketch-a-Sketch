@@ -25,29 +25,29 @@ with gr.Blocks() as demo:
     for k in range(num_images):
         start_state.append([None, None])
     sketch_states = gr.State(start_state)
-    checkbox_state = gr.State(False)
+    checkbox_state = gr.State(True)
     with gr.Row():
         with gr.Column(scale = 1):
             with gr.Tabs(shape=(768, 768),min_width=512):
-                with gr.TabItem("Draw", shape=(512, 512),min_width=512):
+                with gr.TabItem("Sketch", shape=(512, 512),min_width=512):
                     i = gr.Image(source="canvas", shape=(512, 512), tool="color-sketch",
                                 min_width=512, brush_radius = 2).style(width=600, height=600)
-                with gr.TabItem("ShadowDraw", shape=(512, 512),min_width=512):
+                with gr.TabItem("Suggested Lines", shape=(512, 512),min_width=512):
                     i_sketch = gr.Image(shape=(512, 512),min_width=512).style(width=600, height=600)
             prompt_box = gr.Textbox(label="Prompt")
             with gr.Row():
                 btn = gr.Button("Render").style(width=100, height=80)
-                checkbox = gr.Checkbox(label = "ShadowDraw", value=False)
+                checkbox = gr.Checkbox(label = "Generated suggested lines", value=True)
                 btn2 = gr.Button("Reset").style(width=100, height=80)
             i_prev = gr.Image(shape=(512, 512),
                               min_width=512).style(width=768, height=768)
         with gr.Column(scale = 1):
             o_list = [gr.Image().style(width=512, height=512) for _ in range(num_images)]
-    
+
     def sketch(curr_sketch, prev_sketch, prompt, negative_prompt, seed, num_steps):
         print("Sketching")
         if curr_sketch is None:
-            return None, None
+            curr_sketch = np.full((512,512,3), 255)
         if prev_sketch is None:
             prev_sketch = curr_sketch
         generator = torch.Generator(device=device)
@@ -56,7 +56,7 @@ with gr.Blocks() as demo:
 
         # Run function call
         images = pipe(prompt, curr_sketch_image.convert("RGB").point( lambda p: 256 if p > 128 else 0), negative_prompt = negative_prompt, num_inference_steps=num_steps, generator=generator, controlnet_conditioning_scale = 1.0).images
-        
+
         return images[0]
 
     def run_sketching(prompt, curr_sketch, prev_sketch, sketch_states, shadow_draw):
@@ -66,9 +66,11 @@ with gr.Blocks() as demo:
             if seed is None:
                 seed = np.random.randint(1000)
                 sketch_states[k][1] = seed
-            new_image = sketch(curr_sketch, prev_sketch, prompt, 
+            new_image = sketch(curr_sketch, prev_sketch, prompt,
                                             negative_prompt, seed = seed, num_steps = 20)
             to_return.append(new_image)
+        if curr_sketch is None:
+            curr_sketch = np.full((512,512,3), 255)
         prev_sketch = curr_sketch
         if shadow_draw:
             hed_images = []
@@ -80,7 +82,7 @@ with gr.Blocks() as demo:
         else:
             curr_sketch = None
         return to_return + [curr_sketch, prev_sketch, sketch_states]
-    
+
     def reset(sketch_states):
         for k in range(num_images):
             sketch_states[k] = [None, None]
