@@ -2,7 +2,7 @@
 
 ## Controlling diffusion-based image generation with just a few strokes
 
-**[Demo](https://colab.research.google.com/drive/1Biw7s0BD_NtV3wC2lIjVaeg6qXj0KOTv?usp=sharing) | [Blog](vsanimator.github.io/sketchasketch)**
+**[Demo](https://colab.research.google.com/drive/1Biw7s0BD_NtV3wC2lIjVaeg6qXj0KOTv?usp=sharing) | [Blog](https://vsanimator.github.io/sketchasketch)**
 
 | **Input Sketch** | **Generated Image** | **Suggested Lines**
 |:--:| :--: | :--: |
@@ -19,7 +19,7 @@ If the AI isn’t giving you the images you want, don’t worry. Just draw a few
 
 Even better, *Sketch-a-Sketch* will help you create "winning" sketches. As you sketch, the *Sketch-a-Sketch* system will show you suggested future lines that will be most helpful in helping the AI guess what final image you want.
 
-Check out our [blog](vsanimator.github.io/sketchasketch), try out our [demo](https://colab.research.google.com/drive/1Biw7s0BD_NtV3wC2lIjVaeg6qXj0KOTv?usp=sharing) to make your own sketches, or run the Gradio app locally by cloning this repo, installing requirements from requirements.txt, and running demo.py.
+Check out our [blog](https://vsanimator.github.io/sketchasketch), try out our [demo](https://colab.research.google.com/drive/1Biw7s0BD_NtV3wC2lIjVaeg6qXj0KOTv?usp=sharing) to make your own sketches, or run the Gradio app locally by cloning this repo, installing requirements from requirements.txt, and running demo.py.
 
 ## Gradio instructions
 
