@@ -1,4 +1,4 @@
-gradio
+gradio==3.41
 diffusers
 controlnet_aux
 accelerate
